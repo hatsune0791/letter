@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You 💜</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Georgia", serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #8b5cf6, #c084fc, #e9d5ff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: #8b5cf6;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .letter {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+            }
+            to {
+                transform: translateY(-100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>For You 💜</h1>
+
+        <p>
+            I made this little space for you.
+        </p>
+
+        <button onclick="showLetter()">
+            Open Letter
+        </button>
+
+        <div class="letter" id="letter">
+            <p>
+                Dear [His Name],<br><br>
+
+                Put your letter here.<br><br>
+
+                You can write anything you want:
+                memories, things you appreciate about him,
+                or just your feelings.<br><br>
+
+                Love,<br>
+                [Your Name]
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showLetter() {
+            document.getElementById("letter").style.display = "block";
+        }
+
+        for(let i = 0; i < 50; i++) {
+            let s = document.createElement("div");
+            s.className = "sparkle";
+            s.style.left = Math.random() * 100 + "vw";
+            s.style.animationDuration = (5 + Math.random() * 5) + "s";
+            document.body.appendChild(s);
+        }
+    </script>
+
+</body>
+</html>
