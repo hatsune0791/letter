@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A Letter For You</title>
+<title>For You</title>
 
 <style>
     * {
@@ -17,33 +17,35 @@
         min-height: 100vh;
         font-family: Georgia, "Times New Roman", serif;
         background:
-            radial-gradient(circle at top, #4b1d70 0%, #241033 35%, #100817 75%);
+            radial-gradient(circle at top, #51227a 0%, #281139 38%, #100817 80%);
         color: #f4eaff;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 30px;
+        padding: 25px;
+        font-size: 90%;
     }
 
     .container {
         width: 100%;
-        max-width: 850px;
+        max-width: 760px;
+        margin: auto;
     }
 
-    /* PASSWORD */
+    /* PASSWORD SCREEN */
 
     #password-screen {
         text-align: center;
-        padding: 60px 30px;
-        background: rgba(30, 10, 45, 0.82);
+        padding: 50px 30px;
+        background: rgba(30, 10, 45, 0.88);
         border: 1px solid rgba(190, 130, 255, 0.35);
-        border-radius: 22px;
-        box-shadow: 0 0 50px rgba(120, 40, 200, 0.25);
+        border-radius: 20px;
+        box-shadow: 0 0 45px rgba(120, 40, 200, 0.25);
         backdrop-filter: blur(12px);
     }
 
     .title {
-        font-size: 42px;
+        font-size: 38px;
         letter-spacing: 2px;
         margin-bottom: 12px;
         color: #f7eaff;
@@ -51,50 +53,51 @@
 
     .subtitle {
         color: #cdb4e8;
-        font-size: 17px;
-        margin-bottom: 35px;
+        font-size: 16px;
+        margin-bottom: 30px;
     }
 
-    input {
+    input[type="password"] {
         width: 100%;
-        max-width: 350px;
-        padding: 15px 18px;
-        border-radius: 10px;
+        max-width: 320px;
+        padding: 13px 17px;
+        border-radius: 9px;
         border: 1px solid #8151a8;
         background: #170b20;
         color: white;
-        font-size: 16px;
+        font-size: 15px;
         outline: none;
         text-align: center;
     }
 
-    input:focus {
+    input[type="password"]:focus {
         border-color: #b77aff;
         box-shadow: 0 0 15px rgba(183, 122, 255, 0.25);
     }
 
     button {
-        margin-top: 18px;
-        padding: 13px 30px;
+        margin-top: 16px;
+        padding: 12px 28px;
         border: none;
-        border-radius: 10px;
+        border-radius: 9px;
         background: linear-gradient(135deg, #7b2cbf, #5a189a);
         color: white;
-        font-size: 16px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
         cursor: pointer;
         transition: 0.25s;
     }
 
     button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(123, 44, 191, 0.35);
+        box-shadow: 0 8px 22px rgba(123, 44, 191, 0.35);
     }
 
     #error {
         color: #d7a9ff;
-        margin-top: 18px;
+        margin-top: 16px;
         display: none;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     /* WEBSITE */
@@ -105,26 +108,29 @@
 
     .header {
         text-align: center;
-        margin-bottom: 35px;
+        margin-bottom: 28px;
     }
 
     .header h1 {
-        font-size: 45px;
+        font-size: 40px;
         color: #f8edff;
         letter-spacing: 1px;
     }
 
     .header p {
-        margin-top: 10px;
+        margin-top: 8px;
         color: #cbb2df;
-        font-size: 16px;
+        font-size: 15px;
     }
+
+    /* NAVIGATION */
 
     .nav {
         display: flex;
         justify-content: center;
-        gap: 12px;
-        margin-bottom: 25px;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
         flex-wrap: wrap;
     }
 
@@ -132,20 +138,24 @@
         margin: 0;
         background: rgba(100, 40, 145, 0.35);
         border: 1px solid rgba(190, 130, 255, 0.35);
+        min-width: 120px;
     }
 
     .nav button.active {
         background: linear-gradient(135deg, #7b2cbf, #5a189a);
     }
 
+    /* SECTIONS */
+
     .section {
         display: none;
-        background: rgba(24, 9, 36, 0.88);
+        background: rgba(24, 9, 36, 0.90);
         border: 1px solid rgba(190, 130, 255, 0.25);
-        border-radius: 20px;
-        padding: 45px;
-        box-shadow: 0 0 45px rgba(90, 24, 154, 0.18);
-        line-height: 1.85;
+        border-radius: 18px;
+        padding: 38px;
+        box-shadow: 0 0 40px rgba(90, 24, 154, 0.18);
+        line-height: 1.8;
+        text-align: center;
     }
 
     .section.active {
@@ -154,30 +164,35 @@
 
     .section h2 {
         text-align: center;
-        font-size: 28px;
-        margin-bottom: 30px;
+        font-size: 26px;
+        margin-bottom: 25px;
         color: #e8caff;
     }
 
     .letter {
         white-space: pre-line;
         color: #eadcf3;
-        font-size: 17px;
+        font-size: 16px;
+        text-align: center;
+        line-height: 1.9;
     }
+
+    /* REPLY */
 
     textarea {
         width: 100%;
-        min-height: 230px;
+        min-height: 210px;
         resize: vertical;
-        padding: 18px;
-        border-radius: 12px;
+        padding: 16px;
+        border-radius: 11px;
         border: 1px solid #8151a8;
         background: #13091b;
         color: white;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: 16px;
+        font-size: 15px;
         line-height: 1.6;
         outline: none;
+        text-align: left;
     }
 
     textarea:focus {
@@ -185,26 +200,46 @@
         box-shadow: 0 0 15px rgba(183, 122, 255, 0.2);
     }
 
+    textarea::placeholder {
+        color: #80698e;
+    }
+
     .send {
         width: 100%;
-        margin-top: 20px;
+        margin-top: 17px;
     }
 
     .small {
         text-align: center;
-        margin-top: 15px;
+        margin-top: 13px;
         color: #a98cbb;
-        font-size: 13px;
+        font-size: 12px;
     }
 
+    #sentMessage {
+        color: #dcb8ff;
+        margin-top: 15px;
+    }
+
+    /* MOBILE */
+
     @media (max-width: 600px) {
+
+        body {
+            padding: 18px;
+        }
+
         .section {
-            padding: 28px 22px;
+            padding: 28px 20px;
         }
 
         .title,
         .header h1 {
-            font-size: 34px;
+            font-size: 32px;
+        }
+
+        .letter {
+            font-size: 15px;
         }
     }
 </style>
@@ -214,7 +249,8 @@
 
 <div class="container">
 
-    <!-- PASSWORD SCREEN -->
+    <!-- PASSWORD -->
+
     <div id="password-screen">
 
         <h1 class="title">For You</h1>
@@ -241,13 +277,20 @@
     </div>
 
 
-    <!-- ACTUAL WEBSITE -->
+    <!-- WEBSITE -->
+
     <div id="website">
 
         <div class="header">
             <h1>For You</h1>
-            <p>Some things are easier to write than to say.</p>
+
+            <p>
+                Some things are easier to write than to say.
+            </p>
         </div>
+
+
+        <!-- NAVIGATION -->
 
         <div class="nav">
 
@@ -268,32 +311,45 @@
 
 
         <!-- LETTER -->
+
         <div id="letter" class="section active">
 
             <h2>My Letter</h2>
 
             <div class="letter">
-im sorry for everything im sorry that my efforts werent enough for you to keep trying and im sorry that i wasted 4 months of your time on a relationship that couldnt work out. i know you said you took down the website for me but deep down i have a gut feeling you took it down because it was the last thing you needed to move past me and leave us behind. i really thought we couldve made it till my birthday day but sadly we couldnt. i miss you so much and i hope you reach out but since you cant and wont i made this site to maybe fill the void in my heart and match your efforts of making me and website
+
+I'm sorry for everything.
+
+I'm sorry that my efforts weren't enough for you to keep trying, and I'm sorry that I wasted 4 months of your time on a relationship that couldn't work out.
+
+I know you said you took down the website for me, but deep down I have a gut feeling you took it down because it was the last thing you needed to move past me and leave us behind.
+
+I really thought we could've made it till my birthday, but sadly we couldn't.
+
+I miss you so much, and I hope you reach out.
+
+But since you can't and won't, I made this site to maybe fill the void in my heart and match your efforts of making me a website.
 
             </div>
 
         </div>
 
 
-        <!-- REPLY -->
+        <!-- WRITE BACK -->
+
         <div id="reply" class="section">
 
             <h2>Write Back</h2>
 
-            <p style="text-align:center; color:#cbb2df; margin-bottom:25px;">
+            <p style="color:#cbb2df; margin-bottom:22px;">
                 If there's anything you want to say, you can leave it here.
             </p>
 
-            <!-- Replace YOUR_GMAIL below -->
             <form
-    action="https://formsubmit.co/220269tu@senzoku-gakuen.ed.jp"
-    method="POST"
->
+                id="replyForm"
+                action="https://formsubmit.co/220269tu@senzoku-gakuen.ed.jp"
+                method="POST"
+            >
 
                 <textarea
                     name="message"
@@ -313,11 +369,23 @@ im sorry for everything im sorry that my efforts werent enough for you to keep t
                     value="false"
                 >
 
-                <button class="send" type="submit">
+                <button
+                    class="send"
+                    type="submit"
+                    id="sendButton"
+                >
                     Send Message
                 </button>
 
             </form>
+
+            <p
+                id="sentMessage"
+                class="small"
+                style="display:none;"
+            >
+                Your message has been sent.
+            </p>
 
             <p class="small">
                 You don't have to say anything you don't want to.
@@ -331,6 +399,8 @@ im sorry for everything im sorry that my efforts werent enough for you to keep t
 
 
 <script>
+
+/* PASSWORD */
 
 function checkPassword() {
 
@@ -350,6 +420,8 @@ function checkPassword() {
     }
 }
 
+
+/* SECTION SWITCHING */
 
 function showSection(section) {
 
@@ -379,6 +451,80 @@ function showSection(section) {
 
     }
 }
+
+
+/* SEND MESSAGE WITHOUT LEAVING THE WEBSITE */
+
+document.getElementById("replyForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const form = this;
+
+        const button =
+            document.getElementById("sendButton");
+
+        const sentMessage =
+            document.getElementById("sentMessage");
+
+        button.disabled = true;
+
+        button.textContent = "Sending...";
+
+        try {
+
+            const response = await fetch(
+                form.action,
+                {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }
+            );
+
+            if (response.ok) {
+
+                form.reset();
+
+                button.textContent = "Sent";
+
+                sentMessage.style.display = "block";
+
+                setTimeout(function() {
+
+                    button.disabled = false;
+
+                    button.textContent = "Send Message";
+
+                }, 3000);
+
+            } else {
+
+                button.disabled = false;
+
+                button.textContent = "Send Message";
+
+                alert(
+                    "Something went wrong. Please try again."
+                );
+            }
+
+        } catch (error) {
+
+            button.disabled = false;
+
+            button.textContent = "Send Message";
+
+            alert(
+                "Something went wrong. Please try again."
+            );
+
+        }
+
+    });
 
 </script>
 
