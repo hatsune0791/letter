@@ -6,344 +6,837 @@
 
 <title>For You</title>
 
+<!-- Dachshund favicon -->
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'>
+<rect width='100' height='60' rx='12' fill='%23110d16'/>
+<path d='M15 35 C18 25 27 22 39 25 L57 28 C66 29 72 25 77 22 C82 19 88 21 89 26 C90 31 85 34 80 34 L70 34 C66 41 60 43 51 41 L35 39 C28 43 20 43 16 39 Z'
+fill='%23927ab3'/>
+<circle cx='84' cy='25' r='1.7' fill='white'/>
+<path d='M25 38 L22 47 M58 40 L57 48 M68 35 L70 44' stroke='%23927ab3' stroke-width='3' stroke-linecap='round'/>
+</svg>">
+
+<!-- Elegant fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+
+:root {
+    --bg: #100b14;
+    --bg2: #17101d;
+    --purple: #927ab3;
+    --purple-light: #c8b9d8;
+    --text: #eee9f2;
+    --muted: #a69bab;
+    --line: rgba(200,185,216,0.18);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 35%, #24162d 0%, #100b14 48%, #0c080f 100%);
+    color: var(--text);
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+}
+
+/* subtle grain */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    z-index: 999;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ---------------- PASSWORD ---------------- */
+
+#passwordScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.password-box {
+    width: min(400px, 90vw);
+    text-align: center;
+}
+
+.mini-dog {
+    font-size: 27px;
+    opacity: 0.8;
+    margin-bottom: 28px;
+}
+
+.password-box h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 44px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+}
+
+.password-box p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.password-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 13px 5px;
+    color: white;
+    text-align: center;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.password-input:focus {
+    border-bottom-color: var(--purple);
+}
+
+.password-button {
+    margin-top: 25px;
+    background: transparent;
+    color: var(--purple-light);
+    border: 1px solid var(--line);
+    padding: 11px 28px;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.password-button:hover {
+    border-color: var(--purple);
+    background: rgba(146,122,179,0.08);
+}
+
+#error {
+    color: #b89bbd;
+    font-size: 11px;
+    margin-top: 18px;
+}
+
+/* ---------------- MAIN ---------------- */
+
+#mainSite {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top {
+    width: min(900px, 90%);
+    padding-top: 45px;
+    text-align: center;
+}
+
+.top-dog {
+    font-size: 21px;
+    opacity: 0.75;
+}
+
+.top-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 17px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: var(--purple-light);
+}
+
+/* ---------------- HOME BUTTONS ---------------- */
+
+.home {
+    min-height: 70vh;
+    width: min(700px, 90%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-item {
+    position: relative;
+    width: 100%;
+    max-width: 470px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.35s ease;
+}
+
+.menu-item:first-child {
+    border-top: 1px solid var(--line);
+}
+
+.menu-item:hover {
+    background: rgba(146,122,179,0.045);
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.menu-number {
+    display: block;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 5px;
+}
+
+.menu-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 31px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.menu-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* ---------------- CONTENT PAGES ---------------- */
+
+.page {
+    width: min(760px, 90%);
+    margin: 55px auto 100px;
+}
+
+.back {
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 55px;
+}
+
+.back:hover {
+    color: var(--purple-light);
+}
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.page-heading h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 43px;
+    font-weight: 500;
+    margin: 0 0 7px;
+}
+
+.page-heading p {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* ---------------- ENVELOPE ---------------- */
+
+.envelope-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+}
+
+.envelope {
+    position: relative;
+    width: 330px;
+    height: 215px;
+    background: #241a2d;
+    border: 1px solid rgba(200,185,216,0.28);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 35px 90px rgba(0,0,0,0.5);
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, transparent 49.5%, rgba(200,185,216,0.12) 50%, transparent 50.5%);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    background: #2c2036;
+    clip-path: polygon(0 0, 100% 0, 50% 76%);
+    border-bottom: 1px solid rgba(200,185,216,0.15);
+}
+
+.seal {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    background: #6e547f;
+    border: 2px solid #bca8cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.seal::before {
+    content: "♥";
+    position: absolute;
+    color: #dfd3e6;
+    font-size: 33px;
+}
+
+.seal span {
+    position: relative;
+    z-index: 2;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    color: #fff;
+    margin-top: -1px;
+}
+
+.envelope-label {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ---------------- LETTER ---------------- */
+
+.letter {
+    max-width: 650px;
+    margin: auto;
+    padding: 55px 60px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--line);
+}
+
+.letter-date {
+    text-align: right;
+    color: var(--muted);
+    font-size: 10px;
+    margin-bottom: 45px;
+}
+
+.letter p {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    line-height: 1.65;
+    color: #e7e0eb;
+    margin: 0 0 24px;
+}
+
+.letter-signature {
+    margin-top: 45px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 23px;
+    color: var(--purple-light);
+}
+
+/* ---------------- PHOTO GALLERY ---------------- */
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-frame {
+    width: 100%;
+    max-width: 650px;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    background: #171018;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-placeholder {
+    text-align: center;
+    color: var(--muted);
+}
+
+.photo-placeholder span {
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 27px;
+    color: var(--purple-light);
+    margin-bottom: 7px;
+}
+
+.photo-placeholder small {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.gallery-controls {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-top: 22px;
+}
+
+.gallery-button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.gallery-button:hover {
+    color: var(--purple-light);
+}
+
+.photo-counter {
+    color: var(--purple-light);
+    font-size: 10px;
+}
+
+/* ---------------- REPLY ---------------- */
+
+.reply-box {
+    max-width: 600px;
+    margin: auto;
+}
+
+.reply-box p {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 230px;
+    resize: vertical;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--line);
+    outline: none;
+    padding: 20px;
+    color: var(--text);
+    font-family: "Manrope", sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+textarea:focus {
+    border-color: rgba(146,122,179,0.6);
+}
+
+.send-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 32px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--purple-light);
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.send-button:hover {
+    border-color: var(--purple);
+    background: rgba(146,122,179,0.08);
+}
+
+#sentMessage {
+    text-align: center;
+    color: var(--purple-light);
+    font-size: 11px;
+    margin-top: 18px;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 600px) {
+
+    .top {
+        padding-top: 30px;
     }
 
-    body {
-        min-height: 100vh;
-        font-family: Georgia, "Times New Roman", serif;
-        background:
-            radial-gradient(circle at top, #51227a 0%, #281139 38%, #100817 80%);
-        color: #f4eaff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 25px;
-        font-size: 90%;
+    .home {
+        min-height: 65vh;
     }
 
-    .container {
-        width: 100%;
-        max-width: 760px;
-        margin: auto;
+    .menu-name {
+        font-size: 28px;
     }
 
-    /* PASSWORD SCREEN */
-
-    #password-screen {
-        text-align: center;
-        padding: 50px 30px;
-        background: rgba(30, 10, 45, 0.88);
-        border: 1px solid rgba(190, 130, 255, 0.35);
-        border-radius: 20px;
-        box-shadow: 0 0 45px rgba(120, 40, 200, 0.25);
-        backdrop-filter: blur(12px);
-    }
-
-    .title {
-        font-size: 38px;
-        letter-spacing: 2px;
-        margin-bottom: 12px;
-        color: #f7eaff;
-    }
-
-    .subtitle {
-        color: #cdb4e8;
-        font-size: 16px;
-        margin-bottom: 30px;
-    }
-
-    input[type="password"] {
-        width: 100%;
-        max-width: 320px;
-        padding: 13px 17px;
-        border-radius: 9px;
-        border: 1px solid #8151a8;
-        background: #170b20;
-        color: white;
-        font-size: 15px;
-        outline: none;
-        text-align: center;
-    }
-
-    input[type="password"]:focus {
-        border-color: #b77aff;
-        box-shadow: 0 0 15px rgba(183, 122, 255, 0.25);
-    }
-
-    button {
-        margin-top: 16px;
-        padding: 12px 28px;
-        border: none;
-        border-radius: 9px;
-        background: linear-gradient(135deg, #7b2cbf, #5a189a);
-        color: white;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 15px;
-        cursor: pointer;
-        transition: 0.25s;
-    }
-
-    button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 22px rgba(123, 44, 191, 0.35);
-    }
-
-    #error {
-        color: #d7a9ff;
-        margin-top: 16px;
-        display: none;
-        font-size: 13px;
-    }
-
-    /* WEBSITE */
-
-    #website {
-        display: none;
-    }
-
-    .header {
-        text-align: center;
-        margin-bottom: 28px;
-    }
-
-    .header h1 {
-        font-size: 40px;
-        color: #f8edff;
-        letter-spacing: 1px;
-    }
-
-    .header p {
-        margin-top: 8px;
-        color: #cbb2df;
-        font-size: 15px;
-    }
-
-    /* NAVIGATION */
-
-    .nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-
-    .nav button {
-        margin: 0;
-        background: rgba(100, 40, 145, 0.35);
-        border: 1px solid rgba(190, 130, 255, 0.35);
-        min-width: 120px;
-    }
-
-    .nav button.active {
-        background: linear-gradient(135deg, #7b2cbf, #5a189a);
-    }
-
-    /* SECTIONS */
-
-    .section {
-        display: none;
-        background: rgba(24, 9, 36, 0.90);
-        border: 1px solid rgba(190, 130, 255, 0.25);
-        border-radius: 18px;
-        padding: 38px;
-        box-shadow: 0 0 40px rgba(90, 24, 154, 0.18);
-        line-height: 1.8;
-        text-align: center;
-    }
-
-    .section.active {
-        display: block;
-    }
-
-    .section h2 {
-        text-align: center;
-        font-size: 26px;
-        margin-bottom: 25px;
-        color: #e8caff;
+    .page {
+        margin-top: 35px;
     }
 
     .letter {
-        white-space: pre-line;
-        color: #eadcf3;
-        font-size: 16px;
-        text-align: center;
-        line-height: 1.9;
+        padding: 35px 25px;
     }
 
-    /* REPLY */
-
-    textarea {
-        width: 100%;
-        min-height: 210px;
-        resize: vertical;
-        padding: 16px;
-        border-radius: 11px;
-        border: 1px solid #8151a8;
-        background: #13091b;
-        color: white;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 15px;
-        line-height: 1.6;
-        outline: none;
-        text-align: left;
+    .letter p {
+        font-size: 18px;
     }
 
-    textarea:focus {
-        border-color: #b77aff;
-        box-shadow: 0 0 15px rgba(183, 122, 255, 0.2);
+    .envelope {
+        width: 285px;
+        height: 185px;
     }
 
-    textarea::placeholder {
-        color: #80698e;
+    .page-heading h2 {
+        font-size: 37px;
     }
+}
 
-    .send {
-        width: 100%;
-        margin-top: 17px;
-    }
-
-    .small {
-        text-align: center;
-        margin-top: 13px;
-        color: #a98cbb;
-        font-size: 12px;
-    }
-
-    #sentMessage {
-        color: #dcb8ff;
-        margin-top: 15px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 600px) {
-
-        body {
-            padding: 18px;
-        }
-
-        .section {
-            padding: 28px 20px;
-        }
-
-        .title,
-        .header h1 {
-            font-size: 32px;
-        }
-
-        .letter {
-            font-size: 15px;
-        }
-    }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- ================= PASSWORD ================= -->
 
-    <!-- PASSWORD -->
+<section id="passwordScreen">
 
-    <div id="password-screen">
+    <div class="password-box">
 
-        <h1 class="title">For You</h1>
+        <div class="mini-dog">𐂂</div>
 
-        <p class="subtitle">
-            There is something I wanted you to read.
-        </p>
+        <h1>For You</h1>
+
+        <p>something I wanted you to see</p>
 
         <input
+            id="passwordInput"
+            class="password-input"
             type="password"
-            id="password"
-            placeholder="Enter the password"
-            onkeydown="if(event.key === 'Enter') checkPassword()"
+            placeholder="password"
+            autocomplete="off"
         >
 
-        <br>
+        <button class="password-button" onclick="checkPassword()">
+            Enter
+        </button>
 
-        <button onclick="checkPassword()">Open</button>
-
-        <p id="error">
-            That's not it. Hint: think of a candy.
-        </p>
+        <div id="error"></div>
 
     </div>
 
+</section>
 
-    <!-- WEBSITE -->
 
-    <div id="website">
+<!-- ================= MAIN SITE ================= -->
 
-        <div class="header">
-            <h1>For You</h1>
+<section id="mainSite" class="hidden">
 
-            <p>
-                Some things are easier to write than to say.
-            </p>
+    <header class="top">
+
+        <div class="top-dog">𐂂</div>
+
+        <div class="top-title">
+            For You
+        </div>
+
+    </header>
+
+
+    <!-- HOME -->
+
+    <main id="home" class="home">
+
+        <div class="menu">
+
+            <div class="menu-item" onclick="openPage('youPage')">
+
+                <span class="menu-number">01</span>
+
+                <span class="menu-name">
+                    For You
+                </span>
+
+                <span class="menu-sub">
+                    something I wanted to say
+                </span>
+
+            </div>
+
+
+            <div class="menu-item" onclick="openPage('usPage')">
+
+                <span class="menu-number">02</span>
+
+                <span class="menu-name">
+                    For Us
+                </span>
+
+                <span class="menu-sub">
+                    things worth remembering
+                </span>
+
+            </div>
+
+
+            <div class="menu-item" onclick="openPage('mePage')">
+
+                <span class="menu-number">03</span>
+
+                <span class="menu-name">
+                    For Me
+                </span>
+
+                <span class="menu-sub">
+                    if you want to write back
+                </span>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOR YOU ================= -->
+
+    <section id="youPage" class="page hidden">
+
+        <button class="back" onclick="goHome()">
+            ← Back
+        </button>
+
+        <div class="page-heading">
+
+            <h2>For You</h2>
+
+            <p>open when you're ready</p>
+
         </div>
 
 
-        <!-- NAVIGATION -->
+        <!-- Envelope -->
 
-        <div class="nav">
+        <div id="envelopeView" class="envelope-area">
 
-            <button
-                id="letterButton"
-                class="active"
-                onclick="showSection('letter')">
-                My Letter
-            </button>
+            <div class="envelope" onclick="openLetter()">
 
-            <button
-                id="replyButton"
-                onclick="showSection('reply')">
-                Write Back
-            </button>
+                <div class="envelope-flap"></div>
 
-        </div>
+                <div class="seal">
+                    <span>E</span>
+                </div>
 
-
-        <!-- LETTER -->
-
-        <div id="letter" class="section active">
-
-            <h2>My Letter</h2>
-
-            <div class="letter">
-
-I'm sorry for everything.
-
-I'm sorry that my efforts weren't enough for you to keep trying, and I'm sorry that I wasted 4 months of your time on a relationship that couldn't work out.
-
-I know you said you took down the website for me, but deep down I have a gut feeling you took it down because it was the last thing you needed to move past me and leave us behind.
-
-I really thought we could've made it till my birthday, but sadly we couldn't.
-
-I miss you so much, and I hope you reach out.
-
-But since you can't and won't, I made this site to maybe fill the void in my heart and match your efforts of making me a website.
+                <div class="envelope-label">
+                    A letter for you
+                </div>
 
             </div>
 
         </div>
 
 
-        <!-- WRITE BACK -->
+        <!-- Letter -->
 
-        <div id="reply" class="section">
+        <div id="letterView" class="hidden">
 
-            <h2>Write Back</h2>
+            <div class="letter">
 
-            <p style="color:#cbb2df; margin-bottom:22px;">
-                If there's anything you want to say, you can leave it here.
+                <div class="letter-date">
+                    —
+                </div>
+
+                <p>
+                    I'm sorry for everything.
+                </p>
+
+                <p>
+                    I'm sorry that my efforts weren't enough for you to keep trying, and I'm sorry that I wasted 4 months of your time on a relationship that couldn't work out.
+                </p>
+
+                <p>
+                    I know you said you took down the website for me, but deep down I have a gut feeling you took it down because it was the last thing you needed to move past me and leave us behind.
+                </p>
+
+                <p>
+                    I really thought we could've made it till my birthday, but sadly we couldn't.
+                </p>
+
+                <p>
+                    I miss you so much, and I hope you reach out.
+                </p>
+
+                <p>
+                    But since you can't and won't, I made this site to maybe fill the void in my heart and match your efforts of making me a website.
+                </p>
+
+                <div class="letter-signature">
+                    — Hatsune
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOR US ================= -->
+
+    <section id="usPage" class="page hidden">
+
+        <button class="back" onclick="goHome()">
+            ← Back
+        </button>
+
+        <div class="page-heading">
+
+            <h2>For Us</h2>
+
+            <p>the things we had</p>
+
+        </div>
+
+
+        <div class="gallery">
+
+            <div class="photo-frame" id="photoFrame">
+
+                <div class="photo-placeholder">
+
+                    <span>Our memories</span>
+
+                    <small>
+                        photos will live here
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-controls">
+
+                <button class="gallery-button" onclick="previousPhoto()">
+                    ← Previous
+                </button>
+
+                <div class="photo-counter" id="counter">
+                    01 / 01
+                </div>
+
+                <button class="gallery-button" onclick="nextPhoto()">
+                    Next →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOR ME ================= -->
+
+    <section id="mePage" class="page hidden">
+
+        <button class="back" onclick="goHome()">
+            ← Back
+        </button>
+
+        <div class="page-heading">
+
+            <h2>For Me</h2>
+
+            <p>if you want to write back</p>
+
+        </div>
+
+
+        <div class="reply-box">
+
+            <p>
+                You don't have to say anything.<br>
+                But if you want to, you can leave something here.
             </p>
+
 
             <form
                 id="replyForm"
@@ -353,9 +846,10 @@ But since you can't and won't, I made this site to maybe fill the void in my hea
 
                 <textarea
                     name="message"
-                    placeholder="Write whatever you want me to know..."
+                    placeholder="write something..."
                     required
                 ></textarea>
+
 
                 <input
                     type="hidden"
@@ -369,108 +863,199 @@ But since you can't and won't, I made this site to maybe fill the void in my hea
                     value="false"
                 >
 
+
                 <button
-                    class="send"
                     type="submit"
+                    class="send-button"
                     id="sendButton"
                 >
-                    Send Message
+                    Send
                 </button>
 
             </form>
 
-            <p
-                id="sentMessage"
-                class="small"
-                style="display:none;"
-            >
-                Your message has been sent.
-            </p>
 
-            <p class="small">
-                You don't have to say anything you don't want to.
-            </p>
+            <div id="sentMessage"></div>
 
         </div>
 
-    </div>
+    </section>
 
-</div>
+</section>
 
 
 <script>
 
-/* PASSWORD */
+/* ================= PASSWORD ================= */
 
 function checkPassword() {
 
-    const password =
-        document.getElementById("password").value;
+    const input = document.getElementById("passwordInput");
+    const error = document.getElementById("error");
 
-    if (password.toLowerCase() === "sweet tarts") {
+    if (input.value.toLowerCase().trim() === "sweet tarts") {
 
-        document.getElementById("password-screen").style.display = "none";
-
-        document.getElementById("website").style.display = "block";
+        document.getElementById("passwordScreen").classList.add("hidden");
+        document.getElementById("mainSite").classList.remove("hidden");
 
     } else {
 
-        document.getElementById("error").style.display = "block";
+        error.innerText =
+            "That's not it. Hint: think of a candy.";
+
+        input.value = "";
 
     }
 }
 
 
-/* SECTION SWITCHING */
+/* allow Enter key */
 
-function showSection(section) {
+document
+    .getElementById("passwordInput")
+    .addEventListener("keydown", function(event) {
 
-    document.querySelectorAll(".section")
-        .forEach(element => {
-            element.classList.remove("active");
-        });
+        if (event.key === "Enter") {
+            checkPassword();
+        }
 
-    document.getElementById(section)
-        .classList.add("active");
+    });
 
-    document.getElementById("letterButton")
-        .classList.remove("active");
 
-    document.getElementById("replyButton")
-        .classList.remove("active");
+/* ================= NAVIGATION ================= */
 
-    if (section === "letter") {
+function openPage(pageID) {
 
-        document.getElementById("letterButton")
-            .classList.add("active");
+    document.getElementById("home").classList.add("hidden");
 
-    } else {
+    document
+        .querySelectorAll(".page")
+        .forEach(page => page.classList.add("hidden"));
 
-        document.getElementById("replyButton")
-            .classList.add("active");
+    document
+        .getElementById(pageID)
+        .classList.remove("hidden");
 
-    }
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* SEND MESSAGE WITHOUT LEAVING THE WEBSITE */
+function goHome() {
 
-document.getElementById("replyForm")
+    document
+        .querySelectorAll(".page")
+        .forEach(page => page.classList.add("hidden"));
+
+    document
+        .getElementById("home")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* ================= LETTER ================= */
+
+function openLetter() {
+
+    document
+        .getElementById("envelopeView")
+        .classList.add("hidden");
+
+    document
+        .getElementById("letterView")
+        .classList.remove("hidden");
+
+}
+
+
+/* ================= GALLERY ================= */
+
+/*
+    LATER:
+    I'll help you replace this with the actual photos
+    from the PDF you send me.
+*/
+
+const photos = [];
+
+let currentPhoto = 0;
+
+
+function updateGallery() {
+
+    const frame = document.getElementById("photoFrame");
+    const counter = document.getElementById("counter");
+
+    if (photos.length === 0) {
+
+        frame.innerHTML = `
+            <div class="photo-placeholder">
+                <span>Our memories</span>
+                <small>photos will live here</small>
+            </div>
+        `;
+
+        counter.innerText = "01 / 01";
+
+        return;
+    }
+
+
+    frame.innerHTML = `
+        <img src="${photos[currentPhoto]}" alt="Memory">
+    `;
+
+    counter.innerText =
+        String(currentPhoto + 1).padStart(2, "0")
+        + " / " +
+        String(photos.length).padStart(2, "0");
+}
+
+
+function nextPhoto() {
+
+    if (photos.length === 0) return;
+
+    currentPhoto =
+        (currentPhoto + 1) % photos.length;
+
+    updateGallery();
+}
+
+
+function previousPhoto() {
+
+    if (photos.length === 0) return;
+
+    currentPhoto =
+        (currentPhoto - 1 + photos.length)
+        % photos.length;
+
+    updateGallery();
+}
+
+
+/* ================= EMAIL FORM ================= */
+
+document
+    .getElementById("replyForm")
     .addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
-        const form = this;
+        const form = event.target;
+        const button = document.getElementById("sendButton");
+        const sentMessage = document.getElementById("sentMessage");
 
-        const button =
-            document.getElementById("sendButton");
-
-        const sentMessage =
-            document.getElementById("sentMessage");
-
+        button.innerText = "Sending...";
         button.disabled = true;
-
-        button.textContent = "Sending...";
 
         try {
 
@@ -489,42 +1074,41 @@ document.getElementById("replyForm")
 
                 form.reset();
 
-                button.textContent = "Sent";
+                button.innerText = "Sent";
 
-                sentMessage.style.display = "block";
+                sentMessage.innerText =
+                    "Your message has been sent.";
 
-                setTimeout(function() {
+                setTimeout(() => {
 
+                    button.innerText = "Send";
                     button.disabled = false;
+                    sentMessage.innerText = "";
 
-                    button.textContent = "Send Message";
-
-                }, 3000);
+                }, 4000);
 
             } else {
 
-                button.disabled = false;
+                throw new Error();
 
-                button.textContent = "Send Message";
-
-                alert(
-                    "Something went wrong. Please try again."
-                );
             }
 
         } catch (error) {
 
+            button.innerText = "Send";
             button.disabled = false;
 
-            button.textContent = "Send Message";
-
-            alert(
-                "Something went wrong. Please try again."
-            );
+            sentMessage.innerText =
+                "Something went wrong. Please try again.";
 
         }
 
     });
+
+
+/* initialize gallery */
+
+updateGallery();
 
 </script>
 
