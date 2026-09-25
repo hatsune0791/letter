@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -64,7 +65,7 @@ body::before {
     display: none !important;
 }
 
-/* ---------------- PASSWORD ---------------- */
+/* PASSWORD */
 
 #passwordScreen {
     min-height: 100vh;
@@ -142,7 +143,7 @@ body::before {
     margin-top: 18px;
 }
 
-/* ---------------- MAIN ---------------- */
+/* MAIN */
 
 #mainSite {
     min-height: 100vh;
@@ -171,7 +172,7 @@ body::before {
     color: var(--purple-light);
 }
 
-/* ---------------- HOME BUTTONS ---------------- */
+/* HOME */
 
 .home {
     min-height: 70vh;
@@ -233,7 +234,7 @@ body::before {
     text-transform: uppercase;
 }
 
-/* ---------------- CONTENT PAGES ---------------- */
+/* PAGES */
 
 .page {
     width: min(760px, 90%);
@@ -276,13 +277,55 @@ body::before {
     text-transform: uppercase;
 }
 
-/* ---------------- ENVELOPE ---------------- */
+/* LETTER ENVELOPES */
+
+.envelope-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 55px;
+}
+
+.envelope-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-message {
+    margin-bottom: 18px;
+    color: var(--purple-light);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+.new-message::before {
+    content: "✦";
+    margin-right: 8px;
+}
+
+.new-message::after {
+    content: "✦";
+    margin-left: 8px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.55;
+    }
+    50% {
+        opacity: 1;
+    }
+}
 
 .envelope-area {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 420px;
+    min-height: 360px;
 }
 
 .envelope {
@@ -364,7 +407,16 @@ body::before {
     color: var(--muted);
 }
 
-/* ---------------- LETTER ---------------- */
+.new-envelope .envelope {
+    background: #291d32;
+    border-color: rgba(200,185,216,0.4);
+}
+
+.new-envelope .seal {
+    background: #80638f;
+}
+
+/* LETTER */
 
 .letter {
     max-width: 650px;
@@ -396,7 +448,24 @@ body::before {
     color: var(--purple-light);
 }
 
-/* ---------------- REPLY ---------------- */
+.letter-back {
+    display: block;
+    margin: 35px auto 0;
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.letter-back:hover {
+    color: var(--purple-light);
+}
+
+/* REPLY */
 
 .reply-box {
     max-width: 600px;
@@ -456,7 +525,7 @@ textarea:focus {
     margin-top: 18px;
 }
 
-/* ---------------- MOBILE ---------------- */
+/* MOBILE */
 
 @media (max-width: 600px) {
 
@@ -492,121 +561,127 @@ textarea:focus {
     .page-heading h2 {
         font-size: 37px;
     }
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- ================= PASSWORD ================= -->
+<!-- PASSWORD -->
 
 <section id="passwordScreen">
 
-    <div class="password-box">
+```
+<div class="password-box">
 
-        <div class="mini-dog">𐂂</div>
+    <div class="mini-dog">𐂂</div>
 
-        <h1>For You</h1>
+    <h1>For You</h1>
 
-        <p>something I wanted you to see</p>
+    <p>something I wanted you to see</p>
 
-        <input
-            id="passwordInput"
-            class="password-input"
-            type="password"
-            placeholder="password"
-            autocomplete="off"
-        >
+    <input
+        id="passwordInput"
+        class="password-input"
+        type="password"
+        placeholder="password"
+        autocomplete="off"
+    >
 
-        <button class="password-button" onclick="checkPassword()">
-            Enter
-        </button>
+    <button class="password-button" onclick="checkPassword()">
+        Enter
+    </button>
 
-        <div id="error"></div>
+    <div id="error"></div>
 
-    </div>
+</div>
+```
 
 </section>
 
-
-<!-- ================= MAIN SITE ================= -->
+<!-- MAIN SITE -->
 
 <section id="mainSite" class="hidden">
 
-    <header class="top">
+```
+<header class="top">
 
-        <div class="top-dog">𐂂</div>
+    <div class="top-dog">𐂂</div>
 
-        <div class="top-title">
-            For You
-        </div>
+    <div class="top-title">
+        For You
+    </div>
 
-    </header>
-
-
-    <!-- HOME -->
-
-    <main id="home" class="home">
-
-        <div class="menu">
-
-            <div class="menu-item" onclick="openPage('youPage')">
-
-                <span class="menu-number">01</span>
-
-                <span class="menu-name">
-                    For You
-                </span>
-
-                <span class="menu-sub">
-                    something I wanted to say
-                </span>
-
-            </div>
+</header>
 
 
-            <div class="menu-item" onclick="openPage('mePage')">
+<!-- HOME -->
 
-                <span class="menu-number">02</span>
+<main id="home" class="home">
 
-                <span class="menu-name">
-                    For Me
-                </span>
+    <div class="menu">
 
-                <span class="menu-sub">
-                    if you want to write back
-                </span>
+        <div class="menu-item" onclick="openPage('youPage')">
 
-            </div>
+            <span class="menu-number">01</span>
 
-        </div>
+            <span class="menu-name">
+                For You
+            </span>
 
-    </main>
-
-
-    <!-- ================= FOR YOU ================= -->
-
-    <section id="youPage" class="page hidden">
-
-        <button class="back" onclick="goHome()">
-            ← Back
-        </button>
-
-        <div class="page-heading">
-
-            <h2>For You</h2>
-
-            <p>open when you're ready</p>
+            <span class="menu-sub">
+                something I wanted to say
+            </span>
 
         </div>
 
 
-        <!-- Envelope -->
+        <div class="menu-item" onclick="openPage('mePage')">
 
-        <div id="envelopeView" class="envelope-area">
+            <span class="menu-number">02</span>
 
-            <div class="envelope" onclick="openLetter()">
+            <span class="menu-name">
+                For Me
+            </span>
+
+            <span class="menu-sub">
+                 write back
+            </span>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- FOR YOU -->
+
+<section id="youPage" class="page hidden">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+    <div class="page-heading">
+
+        <h2>For You</h2>
+
+        <p>open when you're ready</p>
+
+    </div>
+
+
+    <!-- LETTER 1 -->
+
+    <div id="firstEnvelopeView" class="envelope-area">
+
+        <div class="envelope-wrapper">
+
+            <div class="envelope" onclick="openLetter(1)">
 
                 <div class="envelope-flap"></div>
 
@@ -622,125 +697,175 @@ textarea:focus {
 
         </div>
 
+    </div>
 
-        <!-- Letter -->
 
-        <div id="letterView" class="hidden">
+    <!-- LETTER 1 CONTENT -->
 
-            <div class="letter">
+    <div id="letterView1" class="hidden">
 
-                <div class="letter-date">
-                    —
+        <div class="letter">
+
+            <div class="letter-date">
+                —
+            </div>
+
+            <p>
+               I'm sorry for everything.
+
+I'm sorry that my efforts weren't enough for you to keep trying, and I'm sorry that I wasted 4 months of your time on a relationship that couldn't work out.
+
+I know you said you took down the website for me, but deep down I have a gut feeling you took it down because it was the last thing you needed to move on from me and leave us behind.
+
+I really thought we could've spent the last 3 months of 20026 together since i view those months very fondly and i thought we could spend the holidays together and keep each other warm with our embrace but i sadly not lol
+
+I miss you so much and every day i think of you. with love and sadness i just want you back in my life. i miss our constant messaging and our nightly calls.
+
+But since you can't and won't reach out i wanted to say thank you for all you did in our relationship esp because you constantly said you didnt do enough when all i ever wanted was you to stay
+            </p>
+
+            <div class="letter-signature">
+                — Hatsune
+            </div>
+
+        </div>
+
+        <button class="letter-back" onclick="showEnvelopes()">
+            ← Back to letters
+        </button>
+
+    </div>
+
+
+    <!-- SECOND ENVELOPE -->
+
+    <div id="secondEnvelopeView" class="envelope-area">
+
+        <div class="envelope-wrapper new-envelope">
+
+            <div id="newMessageBadge" class="new-message">
+                New Message
+            </div>
+
+            <div class="envelope" onclick="openLetter(2)">
+
+                <div class="envelope-flap"></div>
+
+                <div class="seal">
+                    <span>E</span>
                 </div>
 
-                <p>
-                    I'm sorry for everything.
-                </p>
-
-                <p>
-                    I'm sorry that my efforts weren't enough for you to keep trying, and I'm sorry that I wasted 4 months of your time on a relationship that couldn't work out.
-                </p>
-
-                <p>
-                    I know you said you took down the website for me, but deep down I have a gut feeling you took it down because it was the last thing you needed to move on from me and leave us behind.
-                </p>
-
-                <p>
-                    I really thought we could've spent the last 3 months of 20026 together since i view those months very fondly and i thought we could spend the holidays together and keep each other warm with our embrace but i sadly not lol
-                </p>
-
-                <p>
-                    I miss you so much and every day i think of you. with love and sadness i just want you back in my life. i miss our constant messaging and our nightly calls.
-                </p>
-
-                <p>
-                    But since you can't and won't reach out i wanted to say thank you for all you did in our relationship esp because you constantly said you didnt do enough when all i ever wanted was you to stay
-                </p>
-
-                <div class="letter-signature">
-                    — Hatsune
+                <div class="envelope-label">
+                    Another letter for you
                 </div>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- ================= FOR ME ================= -->
+    <!-- SECOND LETTER -->
 
-    <section id="mePage" class="page hidden">
+    <div id="letterView2" class="hidden">
 
-        <button class="back" onclick="goHome()">
-            ← Back
-        </button>
+        <div class="letter">
 
-        <div class="page-heading">
-
-            <h2>For Me</h2>
-
-            <p>please write back </p>
-
-        </div>
-
-
-        <div class="reply-box">
+            <div class="letter-date">
+                —
+            </div>
 
             <p>
-                write back i miss reading your messages.<br>
+                hi eddie thanks for messaging me i didnt think you would lol i miss you so fucking bad. i wish i can call you and i wish you were in bed with me and we could cuddle. i miss hearing your voice before sleeping and our stupid questions and dares we would have for each other.and you are right we are back where we started and idk what to do either. as much as i wanna see you happy i dont wanna imagine you with someone else or be happy without me. i hate the idea of you being with another person and being able to do all the things we never got to. i love you and i hope u like the webiste lolol i tried my best to make it but it looks kinda crappy ngl. the days r so slow without you in it. all i do is think of you. love ya lots like polka dots
             </p>
-
-
-            <form
-                id="replyForm"
-                action="https://formsubmit.co/220269tu@senzoku-gakuen.ed.jp"
-                method="POST"
-            >
-
-                <textarea
-                    name="message"
-                    placeholder="write something..."
-                    required
-                ></textarea>
-
-
-                <input
-                    type="hidden"
-                    name="_subject"
-                    value="A message from your website"
-                >
-
-                <input
-                    type="hidden"
-                    name="_captcha"
-                    value="false"
-                >
-
-
-                <button
-                    type="submit"
-                    class="send-button"
-                    id="sendButton"
-                >
-                    Send
-                </button>
-
-            </form>
-
-
-            <div id="sentMessage"></div>
 
         </div>
 
-    </section>
+        <button class="letter-back" onclick="showEnvelopes()">
+            ← Back to letters
+        </button>
+
+    </div>
 
 </section>
 
 
+<!-- FOR ME -->
+
+<section id="mePage" class="page hidden">
+
+    <button class="back" onclick="goHome()">
+        ← Back
+    </button>
+
+    <div class="page-heading">
+
+        <h2>For Me</h2>
+
+        <p>if you want to write back</p>
+
+    </div>
+
+
+    <div class="reply-box">
+
+        <p>
+            please write back.<br>
+                write back i miss reading your messages.
+
+        </p>
+
+
+        <form
+            id="replyForm"
+            action="https://formsubmit.co/220269tu@senzoku-gakuen.ed.jp"
+            method="POST"
+        >
+
+            <textarea
+                name="message"
+                placeholder="write something..."
+                required
+            ></textarea>
+
+
+            <input
+                type="hidden"
+                name="_subject"
+                value="A message from your website"
+            >
+
+            <input
+                type="hidden"
+                name="_captcha"
+                value="false"
+            >
+
+
+            <button
+                type="submit"
+                class="send-button"
+                id="sendButton"
+            >
+                Send
+            </button>
+
+        </form>
+
+
+        <div id="sentMessage"></div>
+
+    </div>
+
+</section>
+```
+
+</section>
+
 <script>
 
-/* ================= PASSWORD ================= */
+/* PASSWORD */
 
 function checkPassword() {
 
@@ -762,8 +887,7 @@ function checkPassword() {
     }
 }
 
-
-/* allow Enter key */
+/* ENTER KEY */
 
 document
     .getElementById("passwordInput")
@@ -775,8 +899,7 @@ document
 
     });
 
-
-/* ================= NAVIGATION ================= */
+/* NAVIGATION */
 
 function openPage(pageID) {
 
@@ -794,8 +917,11 @@ function openPage(pageID) {
         top: 0,
         behavior: "smooth"
     });
-}
 
+    if (pageID === "youPage") {
+        showEnvelopes();
+    }
+}
 
 function goHome() {
 
@@ -813,23 +939,78 @@ function goHome() {
     });
 }
 
+/* LETTERS */
 
-/* ================= LETTER ================= */
+function openLetter(number) {
 
-function openLetter() {
+    document.getElementById("firstEnvelopeView").classList.add("hidden");
+    document.getElementById("secondEnvelopeView").classList.add("hidden");
 
-    document
-        .getElementById("envelopeView")
-        .classList.add("hidden");
+    document.getElementById("letterView1").classList.add("hidden");
+    document.getElementById("letterView2").classList.add("hidden");
 
-    document
-        .getElementById("letterView")
-        .classList.remove("hidden");
+    if (number === 1) {
 
+        document
+            .getElementById("letterView1")
+            .classList.remove("hidden");
+
+    }
+
+    if (number === 2) {
+
+        document
+            .getElementById("letterView2")
+            .classList.remove("hidden");
+
+        localStorage.setItem("eddieNewMessageOpened", "true");
+
+        document
+            .getElementById("newMessageBadge")
+            .classList.add("hidden");
+
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
+function showEnvelopes() {
 
-/* ================= EMAIL FORM ================= */
+    document.getElementById("letterView1").classList.add("hidden");
+    document.getElementById("letterView2").classList.add("hidden");
+
+    document.getElementById("firstEnvelopeView").classList.remove("hidden");
+    document.getElementById("secondEnvelopeView").classList.remove("hidden");
+
+    checkNewMessage();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+/* NEW MESSAGE NOTIFICATION */
+
+function checkNewMessage() {
+
+    const badge = document.getElementById("newMessageBadge");
+
+    if (localStorage.getItem("eddieNewMessageOpened") === "true") {
+
+        badge.classList.add("hidden");
+
+    } else {
+
+        badge.classList.remove("hidden");
+
+    }
+}
+
+/* EMAIL FORM */
 
 document
     .getElementById("replyForm")
@@ -891,6 +1072,10 @@ document
         }
 
     });
+
+/* INITIALIZE */
+
+checkNewMessage();
 
 </script>
 
